@@ -1,0 +1,15 @@
+on:
+  webhook:
+jobs:
+  print:
+    name: Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a telegram message
+        uses: appleboy/telegram-action@v0.1.0
+        with:
+          to: ${{ secrets.TELEGRAM_TO_SECRET }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            新热门: ${{on.webhook.outputs.body.value1}}
+          format: html
