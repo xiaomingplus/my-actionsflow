@@ -8,8 +8,15 @@ jobs:
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
         with:
-          to: ${{ secrets.TELEGRAM_TO_SECRET }}
+          to: ${{ secrets.TELEGRAM_TO_HOT_CHANNEL }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            新热门: ${{on.webhook.outputs.body.value1}}
+            ${{on.webhook.outputs.body.value3}}
           format: html
+      - name: Send to api
+        uses: actionsflow/axios@v1
+        with:
+          url: ${{secrets.WEIBO_API}}
+          method: "POST"
+          data: |
+            {"text":" <<<${{on.webhook.outputs.body.value1}}>>>","pictureUrls":["<<<${{on.webhook.outputs.body.value2}}>>>"],"originContent":"<<<${{on.webhook.outputs.body.value3}}>>>"}
