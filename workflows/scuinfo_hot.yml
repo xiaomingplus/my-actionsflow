@@ -5,6 +5,14 @@ jobs:
     name: Print
     runs-on: ubuntu-latest
     steps:
+      - name: Send to ifttt
+        uses: actionflow/ifttt-webhook-action@v1
+        with:
+          event: scuinfo_hot
+          key: ${{secrets.IFTTT_KEY}}
+          value1: ${{on.webhook.outputs.body.value1}}
+          value2: ${{on.webhook.outputs.body.value2}}
+          value3: ${{on.webhook.outputs.body.value3}}
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
         with:
