@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send to ifttt
-        uses: actionflow/ifttt-webhook-action@v1
+        uses: actionsflow/ifttt-webhook-action@v1
         with:
           event: scuinfo_hot
           key: ${{secrets.IFTTT_KEY}}
